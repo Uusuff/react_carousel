@@ -26,32 +26,37 @@ const Carousel: React.FC<Props> = ({
 
   const handleNextButton = () => {
     setCurrentIndex((prev) => {
-      const nextIndex = prev + step;
+      const maxStartIndex = totalImages - frameSize;
 
-      if (infinite) {
-        const maxStartIndex = totalImages - frameSize;
-        return nextIndex > maxStartIndex
-          ? (nextIndex % (maxStartIndex + 1))
-          : nextIndex;
+      const positions: number[] = [];
+      for (let i = 0; i <= maxStartIndex; i += step) {
+        positions.push(i);
       }
 
-      const maxIndex = totalImages - frameSize;
-      return nextIndex > maxIndex ? maxIndex : nextIndex;
+      const currentPos = positions.indexOf(prev);
+      const nextPos = currentPos + 1;
+
+      return infinite
+        ? positions[nextPos % positions.length]
+        : positions[Math.min(nextPos, positions.length - 1)];
     });
   };
 
   const handlePrevButton = () => {
     setCurrentIndex((prev) => {
-      const newIndex = prev - step;
+      const maxStartIndex = totalImages - frameSize;
 
-      if (infinite) {
-        const maxStartIndex = totalImages - frameSize;
-        return newIndex < 0
-          ? (maxStartIndex + 1) - ((-newIndex) % (maxStartIndex + 1))
-          : newIndex;
+      const positions: number[] = [];
+      for (let i = 0; i <= maxStartIndex; i += step) {
+        positions.push(i);
       }
 
-      return newIndex < 0 ? 0 : newIndex;
+      const currentPos = positions.indexOf(prev);
+      const prevPos = currentPos - 1;
+
+      return infinite
+        ? positions[(prevPos + positions.length) % positions.length]
+        : positions[Math.max(prevPos, 0)];
     });
   };
 
