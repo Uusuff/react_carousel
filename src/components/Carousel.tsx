@@ -29,11 +29,13 @@ const Carousel: React.FC<Props> = ({
       const nextIndex = prev + step;
 
       if (infinite) {
-        return nextIndex >= totalImages ? 0 : nextIndex;
+        const maxStartIndex = totalImages - frameSize;
+        return nextIndex > maxStartIndex
+          ? (nextIndex % (maxStartIndex + 1))
+          : nextIndex;
       }
 
       const maxIndex = totalImages - frameSize;
-
       return nextIndex > maxIndex ? maxIndex : nextIndex;
     });
   };
@@ -43,7 +45,10 @@ const Carousel: React.FC<Props> = ({
       const newIndex = prev - step;
 
       if (infinite) {
-        return newIndex < 0 ? totalImages - frameSize : newIndex;
+        const maxStartIndex = totalImages - frameSize;
+        return newIndex < 0
+          ? (maxStartIndex + 1) - ((-newIndex) % (maxStartIndex + 1))
+          : newIndex;
       }
 
       return newIndex < 0 ? 0 : newIndex;

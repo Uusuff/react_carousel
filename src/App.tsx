@@ -40,7 +40,6 @@ class App extends React.Component<{}, State> {
     const { images } = this.state;
 
     return (
-
       <div className="App">
         <h1 data-cy="title">Carousel with {images.length} images</h1>
         <Carousel
@@ -58,7 +57,7 @@ class App extends React.Component<{}, State> {
               id="itemId"
               type="number"
               value={this.state.itemWidth}
-              onChange={(e) => this.setState({ itemWidth: +e.target.value })}
+              onChange={e => this.setState({ itemWidth: +e.target.value })}
             />
           </label>
 
@@ -68,7 +67,7 @@ class App extends React.Component<{}, State> {
               id="frameId"
               type="number"
               value={this.state.frameSize}
-              onChange={(e) => this.setState({ frameSize: +e.target.value })}
+              onChange={e => this.setState({ frameSize: +e.target.value })}
             />
           </label>
 
@@ -78,7 +77,7 @@ class App extends React.Component<{}, State> {
               id="stepId"
               type="number"
               value={this.state.step}
-              onChange={(e) => this.setState({ step: +e.target.value })}
+              onChange={e => this.setState({ step: +e.target.value })}
             />
           </label>
 
@@ -88,7 +87,7 @@ class App extends React.Component<{}, State> {
               id="animationId"
               type="number"
               value={this.state.animationDuration}
-              onChange={(e) =>
+              onChange={e =>
                 this.setState({ animationDuration: +e.target.value })
               }
             />
@@ -100,7 +99,7 @@ class App extends React.Component<{}, State> {
               id="infiniteId"
               type="checkbox"
               checked={this.state.infinite}
-              onChange={(e) => this.setState({ infinite: e.target.checked })}
+              onChange={e => this.setState({ infinite: e.target.checked })}
             />
           </label>
         </div>
